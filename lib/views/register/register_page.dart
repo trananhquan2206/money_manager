@@ -1,22 +1,20 @@
-import 'dart:ui';
-
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:money_manager/views/home.dart/home_page.dart';
-import 'package:money_manager/views/register/register_page.dart';
-import 'package:money_manager/widgets/bottom_navbar.dart';
+import 'package:money_manager/views/login/login_page.dart';
 
-class LoginPage extends StatefulWidget {
-  const LoginPage({super.key});
+class RegisterPage extends StatefulWidget {
+  const RegisterPage({super.key});
 
   @override
-  State<LoginPage> createState() => _LoginPageState();
+  State<RegisterPage> createState() => _RegisterPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
-  TextEditingController txtUserName = TextEditingController();
+class _RegisterPageState extends State<RegisterPage> {
+  TextEditingController txtName = TextEditingController();
+  TextEditingController txtEmail = TextEditingController();
   TextEditingController txtPassWord = TextEditingController();
   bool obscureText = true;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,9 +23,10 @@ class _LoginPageState extends State<LoginPage> {
         child: Center(
           child: SingleChildScrollView(
             child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 const SizedBox(
-                  height: 50,
+                  height: 40,
                 ),
                 Image.asset(
                   'assets/images/logo.png',
@@ -48,9 +47,25 @@ class _LoginPageState extends State<LoginPage> {
                   child: Column(
                     children: [
                       TextFormField(
-                        controller: txtUserName,
+                        controller: txtName,
                         decoration: const InputDecoration(
-                            prefixIcon: Icon(Icons.email_outlined),
+                            hintText: 'Họ và tên',
+                            hintStyle:
+                                TextStyle(fontSize: 16, color: Colors.black),
+                            focusedBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                    color: Colors.lightGreen, width: 2.0)),
+                            border: OutlineInputBorder(
+                                borderRadius: BorderRadius.only(
+                                    topLeft: Radius.circular(20),
+                                    bottomRight: Radius.circular(20)))),
+                      ),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      TextFormField(
+                        controller: txtEmail,
+                        decoration: const InputDecoration(
                             hintText: 'Email',
                             hintStyle:
                                 TextStyle(fontSize: 16, color: Colors.black),
@@ -69,7 +84,6 @@ class _LoginPageState extends State<LoginPage> {
                         obscureText: obscureText,
                         controller: txtPassWord,
                         decoration: InputDecoration(
-                            prefixIcon: const Icon(Icons.lock_outlined),
                             suffixIcon: IconButton(
                                 onPressed: () {
                                   obscureText = !obscureText;
@@ -95,16 +109,7 @@ class _LoginPageState extends State<LoginPage> {
                       SizedBox(
                         width: double.infinity,
                         child: ElevatedButton(
-                            onPressed: () {
-                              Navigator.pushAndRemoveUntil(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => const BottomNavbar(
-                                          index: 0,
-                                        )),
-                                (Route<dynamic> route) => false,
-                              );
-                            },
+                            onPressed: () {},
                             style: ElevatedButton.styleFrom(
                               // foregroundColor: Colors.white,
                               backgroundColor:
@@ -119,7 +124,7 @@ class _LoginPageState extends State<LoginPage> {
                             child: const Padding(
                               padding: EdgeInsets.all(5),
                               child: Text(
-                                'Đăng nhập',
+                                'Đăng ký',
                                 style: TextStyle(
                                     fontSize: 18,
                                     fontWeight: FontWeight.bold,
@@ -130,14 +135,6 @@ class _LoginPageState extends State<LoginPage> {
                       const SizedBox(
                         height: 15,
                       ),
-                      TextButton(
-                          onPressed: () {},
-                          child: const Text(
-                            'Bạn quên mật khẩu ư?',
-                            style: TextStyle(
-                                fontSize: 17,
-                                color: Color.fromARGB(255, 130, 130, 130)),
-                          ))
                     ],
                   ),
                 ),
@@ -153,22 +150,22 @@ class _LoginPageState extends State<LoginPage> {
         child: Center(
           child: RichText(
               text: TextSpan(
-                  text: 'Bạn chưa có tài khoản?',
+                  text: 'Bạn đã có tài khoản?',
                   style: const TextStyle(fontSize: 17, color: Colors.grey),
                   children: [
                 TextSpan(
-                    text: '  Đăng ký',
+                    text: '  Đăng nhập',
                     style: const TextStyle(fontSize: 17, color: Colors.amber),
                     recognizer: TapGestureRecognizer()
                       ..onTap = () {
                         Navigator.pushAndRemoveUntil(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => const RegisterPage()),
+                              builder: (context) => const LoginPage()),
                           (Route<dynamic> route) => false,
                         );
 
-                        print('Đăng ký');
+                        print('Đăng nhập');
                       })
               ])),
         ),

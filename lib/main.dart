@@ -11,10 +11,11 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+        debugShowCheckedModeBanner: false,
         theme: ThemeData(
           // colorScheme: ColorScheme.fromSeed(seedColor: Colors.black),
           // useMaterial3: true,
-          primarySwatch: Colors.blue,
+          primarySwatch: Colors.orange,
           fontFamily: 'Roboto',
         ),
         home: const LoginPage());
